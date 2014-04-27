@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <conio.h>
 
+/* Author : William Cahyadi
+student_id : 110706576 */
+
 void repeat(int i, int N, int X, int Y[], int result[]);
 void repeat2(int i, int X, int *temp, int Y[], int N);
 void repeat3(int i, int N, int result[]);

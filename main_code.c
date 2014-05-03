@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <conio.h>
 
-/* Author : William Cahyadi
-student_id : 110706576 */
+/*Author : William Cahyadi
+student ID : 110706576*/
 
 void repeat(int i, int N, int X, int Y[], int result[]);
 void repeat2(int i, int X, int *temp, int Y[], int N);
 void repeat3(int i, int N, int result[]);
+void verifyN(int *N);
+void verifyX(int *X);
+void verifyYi(int Y[], int i);
 int power(int a, int b); 
 
 
@@ -17,14 +20,10 @@ int main()
 	int Y[100];	
 	int result[100];
 
-label1 :	
-	
 	printf("\nEnter N cases [1-100] : "); scanf("%d",&N);  fflush(stdin);
+	
 	if(N<1||N>100)
-	{
-		printf("\nPlease enter N with value only 1 to 100....");
-		goto label1;
-	}
+		verifyN(&N);
 	
 	repeat(0,N,X,Y,result);
 	
@@ -36,7 +35,6 @@ label1 :
 }
 
 
-
 void repeat(int i, int N, int X, int Y[], int result[])
 {
 	int temp;
@@ -45,13 +43,11 @@ void repeat(int i, int N, int X, int Y[], int result[])
 	{
 		printf("\n Case %d\n",i+1);
 		temp=0;
-label2 :
+
 		printf("\n Enter number of X [1 to 100] : "); scanf("%d",&X); fflush(stdin);
+		
 		if(X<1||X>100)
-		{
-			printf("\n Please enter number of X with value only 1 to 100....");
-			goto label2;
-		}
+			verifyX(&X);
 		
 		repeat2(0, X, &temp, Y, N);
 		result[i]=temp;	
@@ -66,24 +62,17 @@ void repeat2(int i, int X, int *temp, int Y[], int N)
 	if(i<X)
 	{
 
-label3 : 
-
 		printf("\n  Enter value for X integer %d [-100 to 100] : ",i+1); scanf("%d",&Y[i]); fflush(stdin);
 		
 		if(Y[i] < -100 || Y[i] > 100)
-		{
-			printf("\n  Please enter X integer %d with value only -100 to 100....",i+1);
-			goto label3;
-		}
+			verifyYi(Y,i);
 		
 		else if(Y[i] >= -100 && Y[i] < 0)
-			goto label4;
+			*temp = *temp + 0;
 		
 		else
 			*temp = *temp + power(Y[i],N);
-
-label4 :
-		
+			
 		i++;
 		repeat2(i, X, &(*temp), Y, N);
 	}
@@ -113,3 +102,33 @@ int power(int a, int b)
 		
 	return output;
 } 
+
+
+void verifyN(int *N)
+{
+	printf("\nPlease enter N with value only 1 to 100....");
+	printf("\nEnter N cases [1-100] : "); scanf("%d",&(*N));  fflush(stdin);
+	
+	if(*N<1||*N>100)
+		verifyN(&(*N));
+}
+
+
+void verifyX(int *X)
+{
+	printf("\n Please enter number of X with value only 1 to 100....");
+	printf("\n Enter number of X [1 to 100] : "); scanf("%d",&(*X)); fflush(stdin);
+	
+	if(*X<1||*X>100)
+		verifyX(&(*X));
+}
+
+
+void verifyYi(int Y[], int i)
+{
+	printf("\n  Please enter X integer %d with value only -100 to 100....",i+1);
+	printf("\n  Enter value for X integer %d [-100 to 100] : ",i+1); scanf("%d",&Y[i]); fflush(stdin);
+	
+	if(Y[i] < -100 || Y[i] > 100)
+		verifyYi(Y,i);
+}

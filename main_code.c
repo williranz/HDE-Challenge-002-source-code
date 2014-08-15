@@ -67,7 +67,7 @@ void repeat2(int i, int X, int *temp, int Y[], int N)
 		if(Y[i] < -100 || Y[i] > 100)
 			verifyYi(Y,i);
 		
-		else if(Y[i] >= -100 && Y[i] < 0)
+		if(Y[i] >= -100 && Y[i] < 0)
 			*temp = *temp + 0;
 		
 		else
